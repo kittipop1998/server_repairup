@@ -43,11 +43,4 @@ class RepairSerializer(serializers.ModelSerializer):
                   'completed_data', 'approve_data',
                   'image', 'user_profile']
 
-<<<<<<< HEAD
 
-=======
->>>>>>> ca61a92342528267e9136f25a02f90f0b9032db9
-# class RepairTypeSerializer(serializers.ModelSerializer):
-#     class Meta:
-#         model = RepairType
-#         fields = ['nameRe']
