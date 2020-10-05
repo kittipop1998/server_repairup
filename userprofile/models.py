@@ -1,6 +1,8 @@
 from django.db import models
 from django.contrib.auth import get_user_model
-User = get_user_model()
+from django.contrib.auth.models import Group, User
+
+# User = get_user_model()
 
 
 class Dormitory(models.Model):
@@ -31,6 +33,7 @@ class UserProfile(User):
     department = models.TextField()
     branch = models.TextField()
     room = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True)
+    # phone = models.CharField(max_length=255)
 
     def __str__(self):
         return "{}".format(self.nameUs)
