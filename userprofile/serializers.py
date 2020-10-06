@@ -32,17 +32,19 @@ class GroupSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
-
     class Meta:
         fields = '__all__'
         model = UserProfile
+
 
 class UserSerializer(serializers.ModelSerializer):
     groups = GroupSerializer(read_only=True, many=True)
 
     class Meta:
         model = User
-        exclude = ('id', 'password', 'user_permissions', 'is_staff', 'is_active', 'is_superuser')
+        exclude = ('password', 'user_permissions', 'is_staff', 'is_active', 'is_superuser')
+
+
 class RepairTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = RepairType
@@ -57,5 +59,5 @@ class RepairSerializer(serializers.ModelSerializer):
 # class UserRegisterView(serializers.ModelSerializer):
 #     groups = GroupSerializer(read_only=True, many=True)
 #     class Meta:
-        # model = User
-        # fields = ['id', 'username', 'password', 'first_name', 'last_name', 'email', 'groups']
+# model = User
+# fields = ['id', 'username', 'password', 'first_name', 'last_name', 'email', 'groups']
