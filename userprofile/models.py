@@ -53,14 +53,15 @@ class Repair(models.Model):
 
     contact = models.TextField()
     desc = models.TextField()
-    created_date = models.DateTimeField()
+    created_date = models.DateField()
     status = models.IntegerField(null=True, blank=True, choices=status_choices)
     request_date = models.DateField(auto_now=True)
     completed_data = models.DateField(auto_now=True)
     approve_data = models.DateField(auto_now=True)
-    image = models.FileField(upload_to='images/', null=True, blank=True)
+    image = models.ImageField(upload_to='images/', null=True, blank=True)
     user_profile = models.ForeignKey(UserProfile, null=True, blank=True, on_delete=models.SET_NULL)
     repair_type = models.ForeignKey(RepairType, on_delete=models.SET_NULL, null=True, blank=True)
+    room = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return "{} {}".format(self.desc, self.repair_type)

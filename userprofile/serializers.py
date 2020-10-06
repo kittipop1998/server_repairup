@@ -38,9 +38,6 @@ class RepairTypeSerializer(serializers.ModelSerializer):
 class RepairSerializer(serializers.ModelSerializer):
     class Meta:
         model = Repair
-        fields = ['id', 'status_choices', 'contact', 'desc', 'created_date',
-                  'status', 'request_date',
-                  'completed_data', 'approve_data',
-                  'image', 'user_profile']
+        fields = '__all__'
 
 
