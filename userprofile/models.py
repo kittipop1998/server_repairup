@@ -30,10 +30,16 @@ class Room(models.Model):
 
 class UserProfile(User):
     nameUs = models.CharField(max_length=255)
+    # yearUs = models.CharField(max_length=4)
     department = models.TextField()
     branch = models.TextField()
     room = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True)
+    # room_type = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True)
+    # dormitory = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True)
     # phone = models.CharField(max_length=255)
+    # facebook = models.CharField(max_lenth=100)
+    # image = models.FileField(upload_to='image_uer/', null=True, blank=True)
+
 
     def __str__(self):
         return "{}".format(self.nameUs)
