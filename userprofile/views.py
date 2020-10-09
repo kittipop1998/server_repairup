@@ -48,6 +48,7 @@ class UserView(UserDetailsView):
         user = User.objects.get(username=request.user)
         user_profile = user
         user_profile_data = UserSerializer(user_profile).data
+        user_profile_data['id'] = user_profile.id
         return Response(user_profile_data)
 
     def update(self, request, *args, **kwargs):

@@ -1,8 +1,9 @@
-from rest_framework import serializers
+from rest_framework import serializers, filters
 from django.db import models
 from django import forms
 from django.contrib.auth.models import Group, User
 from .models import Dormitory, RoomType, Room, UserProfile, RepairType, Repair
+import django_filters.rest_framework
 
 
 class DormitorySerializer(serializers.ModelSerializer):
@@ -19,10 +20,11 @@ class RoomTypeSerializer(serializers.ModelSerializer):
 
 class RoomSerializer(serializers.ModelSerializer):
     room_type = RoomTypeSerializer(read_only=True)
+    dormitory = DormitorySerializer(read_only=True)
 
     class Meta:
         model = Room
-        fields = ['id', 'nameRo', 'room_type']
+        fields = ['id', 'nameRo', 'room_type', 'dormitory']
 
 
 class GroupSerializer(serializers.ModelSerializer):
@@ -32,17 +34,19 @@ class GroupSerializer(serializers.ModelSerializer):
 
 
 class UserProfileSerializer(serializers.ModelSerializer):
-
     class Meta:
         fields = '__all__'
         model = UserProfile
+
 
 class UserSerializer(serializers.ModelSerializer):
     groups = GroupSerializer(read_only=True, many=True)
 
     class Meta:
         model = User
-        exclude = ('id', 'password', 'user_permissions', 'is_staff', 'is_active', 'is_superuser')
+        exclude = ('password', 'user_permissions', 'is_staff', 'is_active', 'is_superuser')
+
+
 class RepairTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = RepairType
@@ -50,15 +54,18 @@ class RepairTypeSerializer(serializers.ModelSerializer):
 
 
 class RepairSerializer(serializers.ModelSerializer):
+    room_data = RoomSerializer(source='room', read_only=True)
+    repairType_data = RepairTypeSerializer(source='repair_type', read_only=True)
+    filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['id']
+    ordering = ['-id']
+
     class Meta:
         model = Repair
-        fields = ['id', 'status_choices', 'contact', 'desc', 'created_date',
-                  'status', 'request_date',
-                  'completed_data', 'approve_data',
-                  'image', 'user_profile']
+        fields = '__all__'
 
 # class UserRegisterView(serializers.ModelSerializer):
 #     groups = GroupSerializer(read_only=True, many=True)
 #     class Meta:
-        # model = User
-        # fields = ['id', 'username', 'password', 'first_name', 'last_name', 'email', 'groups']
+# model = User
+# fields = ['id', 'username', 'password', 'first_name', 'last_name', 'email', 'groups']
