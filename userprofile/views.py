@@ -60,15 +60,15 @@ class UserView(UserDetailsView):
         else:
             return Response(user_slz.error_messages, status=status.HTTP_400_BAD_REQUEST)
 
-        # profile = user
-        # try:
-        #     profile.department_id = request.data.get("department")
-        #     profile.branch_id = request.data.get("branch")
-        #     profile.room_id = request.data.get("room")
-        #     profile.phone = request.data.get("phone")
-        #     profile.save()
-        #     slz = serializers.UserProfileSerializer(profile)
-        #     return Response(slz.data)
-        # except ValueError as e:
-        #     return Response(e, status=status.HTTP_400_BAD_REQUEST)
+        profile = user
+        try:
+            profile.department_id = request.data.get("department")
+            profile.branch_id = request.data.get("branch")
+            profile.room_id = request.data.get("room")
+            profile.phone = request.data.get("phone")
+            profile.save()
+            slz = serializers.UserProfileSerializer(profile)
+            return Response(slz.data)
+        except ValueError as e:
+            return Response(e, status=status.HTTP_400_BAD_REQUEST)
 
