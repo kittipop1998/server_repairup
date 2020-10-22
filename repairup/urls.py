@@ -18,13 +18,14 @@ from django.urls import path, include
 from rest_framework import routers
 from userprofile import views as userprofile_views
 from django.conf.urls import url
+
 router = routers.SimpleRouter()
 
 router.register('Dormitorys', userprofile_views.DormitoryViewSet)
 router.register('RoomTypes', userprofile_views.RoomTypeViewSet)
 router.register('Rooms', userprofile_views.RoomViewSet)
-# router.register('UserProfiles', userprofile_views.UserProfileViewSet)
-# router.register('Register', userprofile_views.UserRegisterView)
+router.register('UserProfiles', userprofile_views.UserProfileViewSet)
+# router.register('Registers', userprofile_views.UserRegisterView)
 router.register('RepairType', userprofile_views.RepairTypeViewSet)
 router.register('Repairs', userprofile_views.RepairViewSet)
 
@@ -35,5 +36,6 @@ urlpatterns = [
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('rest-auth/user-profile/', userprofile_views.UserView.as_view()),
+
 
 ]
