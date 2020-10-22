@@ -21,7 +21,6 @@ class RoomTypeViewSet(viewsets.ModelViewSet):
     queryset = RoomType.objects.all()
     serializer_class = RoomTypeSerializer
 
-
 class RoomViewSet(viewsets.ModelViewSet):
     queryset = Room.objects.all()
     serializer_class = RoomSerializer
@@ -35,6 +34,7 @@ class RepairTypeViewSet(viewsets.ModelViewSet):
 class RepairViewSet(viewsets.ModelViewSet):
     queryset = Repair.objects.all()
     serializer_class = RepairSerializer
+    filterset_fields = ['status']
 
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
