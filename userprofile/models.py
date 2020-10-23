@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, User
 
+
 # User = get_user_model()
 
 
@@ -41,7 +42,6 @@ class UserProfile(models.Model):
     face_book = models.CharField(max_length=255)
     image = models.FileField(upload_to='profile-images/', null=True, blank=True)
 
-
     def __str__(self):
         return "{}".format(self.nameStudent)
 
@@ -63,11 +63,10 @@ class Repair(models.Model):
 
     contact = models.TextField()
     desc = models.TextField()
-    created_date = models.DateField()
+    created_date = models.DateField(auto_now_add=True)
     status = models.IntegerField(null=True, blank=True, choices=status_choices)
-    request_date = models.DateField(auto_now=True)
-    completed_data = models.DateField(auto_now=True)
-    approve_data = models.DateField(auto_now=True)
+    completed_data = models.DateField()
+    approve_data = models.DateField()
     imageBe = models.ImageField(upload_to='imagesBe/', null=True, blank=True)
     imageAf = models.ImageField(upload_to='imagesAf/', null=True, blank=True)
     # user_profile = models.ForeignKey(UserProfile, null=True, blank=True, on_delete=models.SET_NULL)
