@@ -36,7 +36,7 @@ class RepairViewSet(viewsets.ModelViewSet):
     serializer_class = RepairSerializer
     filterset_fields = ['status']
 
-class UserProfileViewSet(UserDetailsView):
+class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
 

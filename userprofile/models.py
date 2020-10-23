@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth import get_user_model
 from django.contrib.auth.models import Group, User
 
+
 # User = get_user_model()
 
 
@@ -28,21 +29,21 @@ class Room(models.Model):
         return "{} {}".format(self.dormitory, self.nameRo)
 
 
-class UserProfile(User):
-    nameUs = models.CharField(max_length=255)
-    # yearUs = models.CharField(max_length=4)
-    department = models.TextField()
-    branch = models.TextField()
-    room = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True)
-    # room_type = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True)
-    # dormitory = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True)
-    # phone = models.CharField(max_length=255)
-    # facebook = models.CharField(max_lenth=100)
-    # image = models.FileField(upload_to='image_uer/', null=True, blank=True)
-
+class UserProfile(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    nameStudent = models.CharField(max_length=255)
+    student_id = models.CharField(max_length=8)
+    department = models.CharField(max_length=255)
+    branch = models.CharField(max_length=255)
+    nameRo = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True)
+    room_type = models.ForeignKey(RoomType, on_delete=models.SET_NULL, null=True, blank=True)
+    dormitory = models.ForeignKey(Dormitory, on_delete=models.SET_NULL, null=True, blank=True)
+    contact = models.CharField(max_length=10)
+    face_book = models.CharField(max_length=255)
+    image = models.FileField(upload_to='profile-images/', null=True, blank=True)
 
     def __str__(self):
-        return "{}".format(self.nameUs)
+        return "{}".format(self.nameStudent)
 
 
 class RepairType(models.Model):
@@ -66,9 +67,9 @@ class Repair(models.Model):
     status = models.IntegerField(null=True, blank=True, choices=status_choices)
     completed_data = models.DateField()
     approve_data = models.DateField()
-    image = models.ImageField(upload_to='images/', null=True, blank=True)
-    aftermage = models.ImageField(upload_to='images/', null=True, blank=True)
-    user_profile = models.ForeignKey(UserProfile, null=True, blank=True, on_delete=models.SET_NULL)
+    imageBe = models.ImageField(upload_to='imagesBe/', null=True, blank=True)
+    imageAf = models.ImageField(upload_to='imagesAf/', null=True, blank=True)
+    # user_profile = models.ForeignKey(UserProfile, null=True, blank=True, on_delete=models.SET_NULL)
     repair_type = models.ForeignKey(RepairType, on_delete=models.SET_NULL, null=True, blank=True)
     room = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True)
 
