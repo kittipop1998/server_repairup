@@ -41,6 +41,7 @@ class UserProfileSerializer(serializers.ModelSerializer):
 
 class UserSerializer(serializers.ModelSerializer):
     groups = GroupSerializer(read_only=True, many=True)
+    userprofile = UserProfileSerializer(read_only=True)
 
     class Meta:
         model = User

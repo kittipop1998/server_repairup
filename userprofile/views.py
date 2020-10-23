@@ -5,6 +5,7 @@ from rest_auth.views import UserDetailsView
 from django.conf.urls.static import static
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from rest_framework import  status
 from django.contrib.auth.models import Group, User
 from .models import Dormitory, RoomType, Room, UserProfile, RepairType, Repair
 from .serializers import DormitorySerializer, RoomTypeSerializer, RoomSerializer, UserProfileSerializer, \
@@ -53,8 +54,20 @@ class UserView(UserDetailsView):
 
     def update(self, request, *args, **kwargs):
         user = User.objects.get(username=request.user)
-        user_data = request.data.get("user")
+        user_data = dict()
+        user_data['image'] = request.FILES['image']
+        user_data['nameStudent'] = request.POST['nameStudent']
+        user_data['student_id'] = request.POST['student_id']
+        user_data['department'] = request.POST['department']
+        user_data['branch'] = request.POST['branch']
+        # user_data['nameRo'] = request.POST['nameRo']
+        # user_data['room_type'] = request.POST['room_type']
+        # user_data['domitory'] = request.POST['domitory']
+        user_data['contact'] = request.POST['contact']
+        user_data['face_book'] = request.POST['face_book']
+        print(user_data)
         user_slz = UserSerializer(user, data=user_data)
+
         if user_slz.is_valid():
             user_slz.save()
         else:
