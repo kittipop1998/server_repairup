@@ -54,34 +54,56 @@ class UserView(UserDetailsView):
 
     def update(self, request, *args, **kwargs):
         user = User.objects.get(username=request.user)
+        user_profile = UserProfile.objects.get(user=user)
         user_data = dict()
-        user_data['image'] = request.FILES['image']
-        user_data['nameStudent'] = request.POST['nameStudent']
-        user_data['student_id'] = request.POST['student_id']
-        user_data['department'] = request.POST['department']
-        user_data['branch'] = request.POST['branch']
-        # user_data['nameRo'] = request.POST['nameRo']
-        # user_data['room_type'] = request.POST['room_type']
-        # user_data['domitory'] = request.POST['domitory']
-        user_data['contact'] = request.POST['contact']
-        user_data['face_book'] = request.POST['face_book']
-        print(user_data)
-        user_slz = UserSerializer(user, data=user_data)
-
-        if user_slz.is_valid():
-            user_slz.save()
-        else:
-            return Response(user_slz.error_messages, status=status.HTTP_400_BAD_REQUEST)
-
-        profile = user
+        try :
+            user_profile.image = request.FILES['image']
+        except :
+            pass
         try:
-            profile.department_id = request.data.get("department")
-            profile.branch_id = request.data.get("branch")
-            profile.room_id = request.data.get("room")
-            profile.phone = request.data.get("phone")
-            profile.save()
-            slz = serializers.UserProfileSerializer(profile)
-            return Response(slz.data)
-        except ValueError as e:
-            return Response(e, status=status.HTTP_400_BAD_REQUEST)
+            user_profile.nameRo = request.POST['nameRo']
+        except:
+            pass
+        try:
+            user_profile.room_type = request.POST['room_type']
+        except:
+            pass
+        try:
+            user_profile.domitory = request.POST['domitory']
+        except:
+            pass
+        try:
+            user_profile.nameStudent = request.POST['nameStudent']
+        except:
+            pass
+        try:
+            user_profile.student_id = request.POST['student_id']
+        except:
+            pass
+        try:
+            user_profile.department = request.POST['department']
+        except:
+            pass
+        try:
+            user_profile.branch = request.POST['branch']
+        except:
+            pass
+        try:
+            user_profile.contact = request.POST['contact']
+        except:
+            pass
+        try:
+            user_profile.face_book = request.POST['face_book']
+        except:
+            pass
+
+        # user_data['student_id'] = request.POST['student_id']
+        # user_data['department'] = request.POST['department']
+        # user_data['branch'] = request.POST['branch']
+        # user_data['contact'] = request.POST['contact']
+        # user_data['face_book'] = request.POST['face_book']
+        user_profile.save()
+
+        return  Response(UserProfileSerializer(user_profile).data)
+
 
