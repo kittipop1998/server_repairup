@@ -55,6 +55,7 @@ class RepairTypeSerializer(serializers.ModelSerializer):
 
 
 class RepairSerializer(serializers.ModelSerializer):
+    userprofile = UserProfileSerializer(read_only=True, source='user_profile')
     room_data = RoomSerializer(source='room', read_only=True)
     repairType_data = RepairTypeSerializer(source='repair_type', read_only=True)
     filter_backends = [filters.OrderingFilter]
