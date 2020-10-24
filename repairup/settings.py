@@ -141,3 +141,5 @@ REST_FRAMEWORK = {
     ],    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 
 }
+
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # for fix :  [WinError 10061]
