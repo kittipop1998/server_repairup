@@ -55,45 +55,47 @@ class UserView(UserDetailsView):
     def update(self, request, *args, **kwargs):
         user = User.objects.get(username=request.user)
         user_profile = UserProfile.objects.get(user=user)
+        request_data = request.data
+        print(request_data['nameStudent'])
         user_data = dict()
         try :
             user_profile.image = request.FILES['image']
         except :
             pass
         try:
-            user_profile.nameRo = request.POST['nameRo']
+            user_profile.nameRo = request_data['nameRo']
         except:
             pass
         try:
-            user_profile.room_type = request.POST['room_type']
+            user_profile.room_type = request_data['room_type']
         except:
             pass
         try:
-            user_profile.domitory = request.POST['domitory']
+            user_profile.domitory = request_data['domitory']
         except:
             pass
         try:
-            user_profile.nameStudent = request.POST['nameStudent']
+            user_profile.nameStudent = request_data['nameStudent']
         except:
             pass
         try:
-            user_profile.student_id = request.POST['student_id']
+            user_profile.student_id = request_data['student_id']
         except:
             pass
         try:
-            user_profile.department = request.POST['department']
+            user_profile.department = request_data['department']
         except:
             pass
         try:
-            user_profile.branch = request.POST['branch']
+            user_profile.branch = request_data['branch']
         except:
             pass
         try:
-            user_profile.contact = request.POST['contact']
+            user_profile.contact = request_data['contact']
         except:
             pass
         try:
-            user_profile.face_book = request.POST['face_book']
+            user_profile.face_book = request_data['face_book']
         except:
             pass
 
