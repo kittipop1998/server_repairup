@@ -143,3 +143,9 @@ REST_FRAMEWORK = {
 }
 
 EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'  # for fix :  [WinError 10061]
+
+
+
+REST_AUTH_REGISTER_SERIALIZERS = {
+        'REGISTER_SERIALIZER': 'userprofile.register_serializer.RegisterSerializer',
+}

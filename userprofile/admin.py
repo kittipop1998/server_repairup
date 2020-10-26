@@ -16,7 +16,7 @@ class RoomAdmin(admin.ModelAdmin):
 
 
 class UserProfileAdmin(admin.ModelAdmin):
-    pass
+    list_display =('id',)
 
 
 class RepairTypeAdmin(admin.ModelAdmin):

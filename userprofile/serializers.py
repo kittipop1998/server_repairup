@@ -66,9 +66,11 @@ class RepairSerializer(serializers.ModelSerializer):
         model = Repair
         fields = '__all__'
 
-cl
+
 
 # class UserRegisterView(serializers.ModelSerializer):
+
+# class RegisterView(serializers.ModelSerializer):
 #     groups = GroupSerializer(read_only=True, many=True)
 #     class Meta:
 # model = User
