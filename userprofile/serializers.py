@@ -55,7 +55,7 @@ class RepairTypeSerializer(serializers.ModelSerializer):
 
 
 class RepairSerializer(serializers.ModelSerializer):
-    userprofile = UserProfileSerializer(read_only=True, source='user_profile')
+    userprofile = UserSerializer(read_only=True, source='user')
     room_data = RoomSerializer(source='room', read_only=True)
     repairType_data = RepairTypeSerializer(source='repair_type', read_only=True)
     filter_backends = [filters.OrderingFilter]
@@ -65,6 +65,10 @@ class RepairSerializer(serializers.ModelSerializer):
     class Meta:
         model = Repair
         fields = '__all__'
+
+
+
+# class UserRegisterView(serializers.ModelSerializer):
 
 # class RegisterView(serializers.ModelSerializer):
 #     groups = GroupSerializer(read_only=True, many=True)

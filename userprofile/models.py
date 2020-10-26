@@ -73,7 +73,7 @@ class Repair(models.Model):
     approve_data = models.DateField(null=True, blank=True)
     imageBe = models.ImageField(upload_to='imagesBe/', null=True, blank=True)
     imageAf = models.ImageField(upload_to='imagesAf/', null=True, blank=True)
-    user_profile = models.ForeignKey(UserProfile, null=True, blank=True, on_delete=models.SET_NULL)
+    user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
     repair_type = models.ForeignKey(RepairType, on_delete=models.SET_NULL, null=True, blank=True)
     note = models.TextField()
     technician = models.TextField()
