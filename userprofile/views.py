@@ -10,7 +10,9 @@ from django.contrib.auth.models import Group, User
 from .models import Dormitory, RoomType, Room, UserProfile, RepairType, Repair
 from .serializers import DormitorySerializer, RoomTypeSerializer, RoomSerializer, UserProfileSerializer, \
     RepairTypeSerializer, RepairSerializer,UserSerializer
-
+from django.contrib.auth.models import User
+from rest_framework.views import APIView
+from rest_framework import status
 
 # Create your views here.
 class DormitoryViewSet(viewsets.ModelViewSet):
@@ -109,3 +111,17 @@ class UserView(UserDetailsView):
         return  Response(UserProfileSerializer(user_profile).data)
 
 
+
+
+class Register(APIView):
+    def post(self, request):
+      user = User.objects.create(
+                username=request.data.get('username'),
+                email=request.data.get('email'),
+                first_name=request.data.get('first_name'),
+                last_name=request.data.get('last_name'),
+                is_staff = request.data.get('is_staff')
+            )
+      user.set_password(str(request.data.get('password')))
+      user.save()
+      return Response({"status":"success","response":"User Successfully Created"}, status=status.HTTP_201_CREATED)

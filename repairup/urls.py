@@ -38,6 +38,7 @@ urlpatterns = [
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('rest-auth/user-profile/', userprofile_views.UserView.as_view()),
-
+    path('admin_register/', userprofile_views.Register.as_view()),
+    # path('api-token-auth/', views.obtain_auth_token),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 

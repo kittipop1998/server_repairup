@@ -56,9 +56,11 @@ class RepairType(models.Model):
 class Repair(models.Model):
     status_choices = [
         (1, 'แจ้งซ่อม'),
-        (2, 'กำลังดำเนินงาน'),
-        (3, 'ดำเนินการเสร็จสิ้น'),
-        (4, 'ยกเลิกคำขอ')
+        (2, 'รออนุมัติ'),
+        (3, 'กำลังดำเนินงาน'),
+        (4, 'ดำเนินการเสร็จสิ้น'),
+        (5, 'ยกเลิกคำขอ'),
+
     ]
 
     contact = models.TextField()
@@ -71,7 +73,11 @@ class Repair(models.Model):
     imageAf = models.ImageField(upload_to='imagesAf/', null=True, blank=True)
     user_profile = models.ForeignKey(UserProfile, null=True, blank=True, on_delete=models.SET_NULL)
     repair_type = models.ForeignKey(RepairType, on_delete=models.SET_NULL, null=True, blank=True)
+    note = models.TextField()
+    technician = models.TextField()
     room = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
         return "{} {}".format(self.desc, self.repair_type)
+
+
