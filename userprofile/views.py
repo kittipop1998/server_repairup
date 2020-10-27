@@ -128,3 +128,8 @@ class Register(APIView):
       return Response({"status":"success","response":"User Successfully Created"}, status=status.HTTP_201_CREATED)
 
 
+class MyRepair(APIView):
+    def get(self, request, pk):
+        items = Repair.objects.filter(user=pk).order_by('pk')
+        serializer = RepairSerializer(items, many=True)
+        return Response(serializer.data)

@@ -55,6 +55,19 @@ class RegisterSerializer(serializers.Serializer):
         self.cleaned_data = self.get_cleaned_data()
         adapter.save_user(request, user, self)
         setup_user_email(request, user, [])
+        user.groups.add(2)
+        UserProfile.objects.create(
+            user=user,
+            nameStudent = '',
+            student_id = '',
+            position = '',
+            rebuilding = '',
+            department = '',
+            branch = '',
+            contact = '',
+            face_book = ''
+
+        )
         return user
 
 
