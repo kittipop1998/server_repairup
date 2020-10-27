@@ -65,10 +65,11 @@ class Repair(models.Model):
 
     contact = models.TextField()
     desc = models.TextField()
-    created_date = models.DateField(auto_now_add=True)
     status = models.IntegerField(null=True, blank=True, choices=status_choices)
-    completed_data = models.DateField(null=True, blank=True)
+    created_date = models.DateField(auto_now_add=True)
+    wait_date = models.DateField(null=True, blank=True)
     approve_data = models.DateField(null=True, blank=True)
+    completed_data = models.DateField(null=True, blank=True)
     imageBe = models.ImageField(upload_to='imagesBe/', null=True, blank=True)
     imageAf = models.ImageField(upload_to='imagesAf/', null=True, blank=True)
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
