@@ -120,8 +120,11 @@ class Register(APIView):
                 email=request.data.get('email'),
                 first_name=request.data.get('first_name'),
                 last_name=request.data.get('last_name'),
-                is_staff = request.data.get('is_staff')
+                is_staff = request.data.get('is_staff'),
+                # is_superuser = request.data.get('is_superuser'),
             )
       user.set_password(str(request.data.get('password')))
       user.save()
       return Response({"status":"success","response":"User Successfully Created"}, status=status.HTTP_201_CREATED)
+
+
