@@ -130,6 +130,12 @@ class Register(APIView):
 
 class MyRepair(APIView):
     def get(self, request, pk):
+
         items = Repair.objects.filter(user=pk).order_by('pk')
+        try:
+            req_data = int(request.GET['status'])
+            items = items.filter(status=req_data)
+        except :
+            pass
         serializer = RepairSerializer(items, many=True)
         return Response(serializer.data)

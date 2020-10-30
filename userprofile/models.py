@@ -77,7 +77,7 @@ class Repair(models.Model):
     user = models.ForeignKey(User, null=True, blank=True, on_delete=models.SET_NULL)
     repair_type = models.ForeignKey(RepairType, on_delete=models.SET_NULL, null=True, blank=True)
     note = models.TextField()
-    technician = models.TextField()
+    technician = models.TextField(null=True, blank=True)
     room = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True)
 
     def __str__(self):
