@@ -33,8 +33,6 @@ class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     nameStudent = models.CharField(max_length=255, null=True, blank=True)
     student_id = models.CharField(max_length=8, null=True, blank=True)
-    position = models.CharField(max_length=255, null=True, blank=True)
-    rebuilding = models.CharField(max_length=255, null=True, blank=True)
     department = models.CharField(max_length=255, null=True, blank=True)
     branch = models.CharField(max_length=255, null=True, blank=True)
     nameRo = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True)
