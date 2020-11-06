@@ -115,6 +115,58 @@ class UserView(UserDetailsView):
         return  Response(UserProfileSerializer(user_profile).data)
 
 
+class UserManagerView(UserDetailsView):
+    queryset = User.objects.all()
+    serializer_class = UserSerializer
+
+    def retrieve(self, request, *args, **kwargs):
+        user = User.objects.get(username=request.user)
+        user_profile = user
+        user_profile_data = UserSerializer(user_profile).data
+        user_profile_data['id'] = user_profile.id
+        return Response(user_profile_data)
+
+    def update(self, request, *args, **kwargs):
+        user = User.objects.get(username=request.user)
+        user_profile = UserProfileManager.objects.get(user=user)
+        request_data = request.data
+        print(request_data['nameManager'])
+        user_data = dict()
+        try :
+            user_profile.image = request.FILES['image']
+        except :
+            pass
+
+        try:
+            user_profile.room_type = request_data['position']
+        except:
+            pass
+        try:
+            user_profile.domitory = request_data['rebuilding']
+        except:
+            pass
+        try:
+            user_profile.nameStudent = request_data['nameManager']
+        except:
+            pass
+        try:
+            user_profile.contact = request_data['contact']
+        except:
+            pass
+        try:
+            user_profile.face_book = request_data['face_book']
+        except:
+            pass
+
+        # user_data['student_id'] = request.POST['student_id']
+        # user_data['department'] = request.POST['department']
+        # user_data['branch'] = request.POST['branch']
+        # user_data['contact'] = request.POST['contact']
+        # user_data['face_book'] = request.POST['face_book']
+        user_profile.save()
+
+        return  Response(UserProfileManagerSerializer(user_profile).data)
+
 
 
 class Register(APIView):
