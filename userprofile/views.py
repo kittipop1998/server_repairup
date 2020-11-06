@@ -7,9 +7,9 @@ from rest_framework.response import Response
 from rest_framework.views import APIView
 from rest_framework import  status
 from django.contrib.auth.models import Group, User
-from .models import Dormitory, RoomType, Room, UserProfile, RepairType, Repair
+from .models import Dormitory, RoomType, Room, UserProfile, UserProfileManager, RepairType, Repair
 from .serializers import DormitorySerializer, RoomTypeSerializer, RoomSerializer, UserProfileSerializer, \
-    RepairTypeSerializer, RepairSerializer,UserSerializer
+    RepairTypeSerializer, RepairSerializer,UserSerializer, UserProfileManagerSerializer
 from django.contrib.auth.models import User
 from rest_framework.views import APIView
 from rest_framework import status
@@ -42,6 +42,10 @@ class RepairViewSet(viewsets.ModelViewSet):
 class UserProfileViewSet(viewsets.ModelViewSet):
     queryset = UserProfile.objects.all()
     serializer_class = UserProfileSerializer
+
+class UserProfileManagerViewSet(viewsets.ModelViewSet):
+    queryset = UserProfileManager.objects.all()
+    serializer_class = UserProfileManagerSerializer
 
 class UserView(UserDetailsView):
     queryset = User.objects.all()

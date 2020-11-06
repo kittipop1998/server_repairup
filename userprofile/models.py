@@ -31,21 +31,33 @@ class Room(models.Model):
 
 class UserProfile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    nameStudent = models.CharField(max_length=255)
-    student_id = models.CharField(max_length=8)
-    position = models.CharField(max_length=255)
-    rebuilding = models.CharField(max_length=255)
-    department = models.CharField(max_length=255)
-    branch = models.CharField(max_length=255)
+    nameStudent = models.CharField(max_length=255, null=True, blank=True)
+    student_id = models.CharField(max_length=8, null=True, blank=True)
+    position = models.CharField(max_length=255, null=True, blank=True)
+    rebuilding = models.CharField(max_length=255, null=True, blank=True)
+    department = models.CharField(max_length=255, null=True, blank=True)
+    branch = models.CharField(max_length=255, null=True, blank=True)
     nameRo = models.ForeignKey(Room, on_delete=models.SET_NULL, null=True, blank=True)
     room_type = models.ForeignKey(RoomType, on_delete=models.SET_NULL, null=True, blank=True)
     dormitory = models.ForeignKey(Dormitory, on_delete=models.SET_NULL, null=True, blank=True)
-    contact = models.CharField(max_length=10)
-    face_book = models.CharField(max_length=255)
+    contact = models.CharField(max_length=10, null=True, blank=True)
+    face_book = models.CharField(max_length=255, null=True, blank=True)
     image = models.FileField(upload_to='profile-images/', null=True, blank=True)
 
     def __str__(self):
         return "{}".format(self.nameStudent)
+
+class UserProfileManager(models.Model):
+        user = models.OneToOneField(User, on_delete=models.CASCADE)
+        nameManager = models.CharField(max_length=255, null=True, blank=True)
+        position = models.CharField(max_length=255, null=True, blank=True)
+        rebuilding = models.CharField(max_length=255, null=True, blank=True)
+        contact = models.CharField(max_length=10, null=True, blank=True)
+        face_book = models.CharField(max_length=255, null=True, blank=True)
+        image = models.FileField(upload_to='profile-images/', null=True, blank=True)
+
+        def __str__(self):
+            return "{}".format(self.nameManager)
 
 
 class RepairType(models.Model):
@@ -82,5 +94,3 @@ class Repair(models.Model):
 
     def __str__(self):
         return "{} {}".format(self.desc, self.repair_type)
-
-
