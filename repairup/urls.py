@@ -27,7 +27,7 @@ router.register('Dormitorys', userprofile_views.DormitoryViewSet)
 router.register('RoomTypes', userprofile_views.RoomTypeViewSet)
 router.register('Rooms', userprofile_views.RoomViewSet)
 router.register('UserProfiles', userprofile_views.UserProfileViewSet)
-router.register('UserProfileManagerห', userprofile_views.UserProfileManagerViewSet)
+# router.register('UserProfileManager', userprofile_views.UserProfileManagerViewSet)
 # router.register('Registers', userprofile_views.UserRegisterView)
 router.register('RepairType', userprofile_views.RepairTypeViewSet)
 router.register('Repairs', userprofile_views.RepairViewSet)
@@ -39,6 +39,7 @@ urlpatterns = [
     path('rest-auth/', include('rest_auth.urls')),
     path('rest-auth/registration/', include('rest_auth.registration.urls')),
     path('rest-auth/user-profile/', userprofile_views.UserView.as_view()),
+    # path('rest-auth/user-profilemanager/', userprofile_views.UserManagerView.as_view()),
     path('admin_register/', userprofile_views.Register.as_view()),
     path('myrepair/<int:pk>', userprofile_views.MyRepair.as_view()),
     # path('api-token-auth/', views.obtain_auth_token),

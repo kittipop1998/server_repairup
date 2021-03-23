@@ -2,7 +2,7 @@ from rest_framework import serializers, filters
 from django.db import models
 from django import forms
 from django.contrib.auth.models import Group, User
-from .models import Dormitory, RoomType, Room, UserProfile, UserProfileManager, RepairType, Repair
+from .models import Dormitory, RoomType, Room, UserProfile, RepairType, Repair
 import django_filters.rest_framework
 
 
@@ -38,10 +38,10 @@ class UserProfileSerializer(serializers.ModelSerializer):
         fields = '__all__'
         model = UserProfile
 
-class UserProfileManagerSerializer(serializers.ModelSerializer):
-    class Meta:
-        fields = '__all__'
-        model = UserProfileManager
+# class UserProfileManagerSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         fields = '__all__'
+#         model = UserProfileManager
 
 
 class UserSerializer(serializers.ModelSerializer):
